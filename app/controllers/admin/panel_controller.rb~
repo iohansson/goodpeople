@@ -1,0 +1,6 @@
+class Admin::PanelController < Admin::ApplicationController
+  def index
+    @queries = Query.all
+    @orders = Order.all
+  end
+end

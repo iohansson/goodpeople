@@ -1,0 +1,6 @@
+<%= form_tag admin_actor_videos_path(actor), method: :post do %>
+  <%= label_tag :video_id, "Добавить видео" %>
+  <%= text_field_tag :video_id %>
+  
+  <%= submit_tag "Добавить" %>
+<% end %>

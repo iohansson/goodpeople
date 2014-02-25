@@ -1,0 +1,8 @@
+<h1>Заказ от <%= @order.name %> для <%= @order.actor_name %></h1>
+
+<ul>
+  <li>Телефон: <%= @order.phone %>
+  <li>Дата мероприятия: <%= @order.event_date.strftime('%d.%m.%Y') %>
+</ul>
+
+<%= content_tag :p, @order.comment %>

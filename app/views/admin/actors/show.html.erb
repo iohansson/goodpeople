@@ -1,0 +1,23 @@
+<h1><%= @actor.name %></h1>
+
+<!-- nav-tabs -->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#photos" data-toggle="tab">Фото</a></li>
+  <li><a href="#videos" data-toggle="tab">Видео</a></li>
+</ul>
+
+<!-- tabs content -->
+<div class="tab-content">
+  <div class="tab-pane active photos" id="photos">
+    <%= render @actor.photos %>
+    <div>
+      <%= render(partial: 'admin/photos/form', locals: { actor: @actor }) %>
+    </div>
+  </div>
+  <div class="tab-pane videos" id="videos">
+    <%= render @actor.videos %>
+    <div>
+      <%= render(partial: 'admin/videos/form', locals: { actor: @actor }) %>
+    </div>
+  </div>
+</div>

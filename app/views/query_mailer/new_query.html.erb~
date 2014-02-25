@@ -1,0 +1,7 @@
+<h1>Заявка от <%= order.name %></h1>
+
+<p>
+  Телефон: <%= order.phone %>
+</p>
+
+<%= content_tag :p, order.comment %>

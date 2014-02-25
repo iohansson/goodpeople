@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="span6">
+    <% if @orders.any? %>
+      <h2>Заказы</h2>
+      <%= render @orders %>
+    <% end %>
+  </div>
+  <div class="span6">
+    <% if @queries.any? %>
+      <h2>Заявки на звонок</h2>
+      <%= render @queries %>
+    <% end %>
+  </div>
+</div>

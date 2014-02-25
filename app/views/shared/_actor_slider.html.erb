@@ -1,0 +1,25 @@
+<% if !@actors.empty? %>
+  <div class="actors">
+    <div class="slider">
+      <ul>
+        <% @actors.each do |actor| %>
+          <li class="actor slide popup-button" data-for="#actor-<%= actor.id %>">
+            <%= image_tag actor.avatar %>
+            <%= content_tag :div, actor.name, class: 'name red-gradiented helper' %>
+            <%= content_tag :div, actor.price, class: 'price red-gradiented helper' %>
+        <% end %>
+      </ul>
+      <a class="arrow">
+        &lsaquo;
+      </a>
+      <a class="arrow">
+        &rsaquo;
+      </a>
+    </div>
+    <div>
+      <a href="#" class="pink-button popup-button" data-for="#order-form" %>Заказать</a>
+    </div>
+  </div>
+<% else %>
+  
+<% end %>

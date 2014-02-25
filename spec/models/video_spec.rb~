@@ -1,0 +1,10 @@
+require 'spec_helper'
+
+describe Video do
+  subject { FactoryGirl.build(:video) }
+  context "Association" do
+    it "belongs to actor" do
+      expect(subject).to respond_to(:actor)
+    end
+  end
+end

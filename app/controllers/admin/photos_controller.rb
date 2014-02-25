@@ -1,0 +1,26 @@
+class Admin::PhotosController < Admin::ApplicationController
+  before_filter :set_actor
+  
+  def create
+    @photo = Photo.new
+    @photo.actor = @actor
+    @photo.image = params[:image]
+    if @photo.save
+      redirect_to admin_actor_path(@actor), notice: "Фото добавлено"
+    else
+      redirect_to admin_actor_path(@actor), notice: "Не удалось добавить фото"
+    end
+  end
+
+  def destroy
+    photo = Photo.find(params[:id])
+    photo.destroy
+    redirect_to admin_actor_url(@actor), notice: "Фото удалено"
+  end
+  
+  protected
+  
+  def set_actor
+    @actor = Actor.find(params[:actor_id])
+  end
+end

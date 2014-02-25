@@ -1,0 +1,4 @@
+<%= content_tag :div, class: "photo", id: photo.id do %>
+  <%= image_tag photo.image_url %>
+  <%= button_to "&times;".html_safe, admin_actor_photo_path(actor_id: photo.actor, id: photo.id), method: :delete, class: "delete" %>
+<% end %>

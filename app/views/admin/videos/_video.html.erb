@@ -1,0 +1,5 @@
+<%= content_tag :div, class: 'video', id: video.id do %>
+  <iframe width="200" height="150" src="http://youtube.com/embed/<%= video.video_id %>">
+  </iframe>
+  <%= button_to "x", admin_actor_video_path(actor_id: video.actor.id, id: video.id), method: :delete, class: 'delete' %>
+<% end %>

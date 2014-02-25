@@ -1,0 +1,219 @@
+jQuery ->
+  $.each $('.slider'), (index,el) ->
+    new Slider(el)
+  $.each $('.popup-button'), (index,el) ->
+    new PopUpButton(el)
+  $.each $('.gallery'), (index,el) ->
+    new Gallery(el)
+  $('#callback-form, #order-form').bind "ajax:beforeSend", (evt, xhr, settings)->
+    form = $(this).find('.form')
+    submitButton = form.find("input[type='submit']")
+    submitButton.data('origText', submitButton.text())
+    submitButton.text('Отправляем...')
+    submitButton.attr('disabled', 'disabled')
+  $('#callback-form, #order-form').bind "ajax:complete", (evt, xhr, status)->
+    form = $(this).find('.form')
+    submitButton = form.find("input[type='submit']")
+    form.html(xhr.responseText)
+    submitButton.text(submitButton.data('origText'))
+    submitButton.removeAttr('disabled')
+  clock = $('.clock').FlipClock
+    countdown: true
+    clockFace: 'DailyCounter'
+    defaultLanguage: 'russian'
+  clock.setTime(3600*24*2)
+  clock.start()
+    
+  
+class Slider
+  constructor: (control) ->
+    @wrapper = $(control)
+    @slider = $(control).children('ul')
+    @slides = @slider.find('.slide')
+    @currentSlide = 0
+    @prevButton = @wrapper.children('a.arrow').first()
+    @nextButton = @wrapper.children('a.arrow').last()
+    @resize()
+    @attachEvents()
+  
+  hasNext: ()=>
+    @currentSlide + 1 < @slides.length
+    
+  hasPrev: ()=>
+    @currentSlide > 0
+    
+  next: ()=>
+    if @hasNext()
+      @moveNext()
+  
+  prev: ()=>
+    if @hasPrev()
+      @movePrev()
+      
+  moveNext: ()=>
+    @slider.animate
+      scrollLeft: "+="+@wrapper.width(),
+      'slow'
+    @currentSlide++
+  
+  movePrev: ()=>
+    @slider.animate
+      scrollLeft: "-="+@wrapper.width(),
+      'slow'
+    @currentSlide--
+    
+  resize: ()=>
+    $.each @slides, (index,el) =>
+      $(el).width('100%')
+  
+  attachEvents: ()=>
+    @prevButton.click(@prev)
+    @nextButton.click(@next)
+
+class Shader
+  constructor: (boundObject) ->
+    @boundObject = boundObject
+    @shader = $('<div class="shader"></div>')
+    @shader.appendTo($('body')).hide()
+    @attachEvents()
+  
+  domObject: ()=>
+    @shader
+    
+  show: ()=>
+    @shader.show()
+    
+  hide: ()=>
+    @boundObject.close()
+    
+  attachEvents: ()=>
+    @shader.click(@hide)
+
+class PopUp
+  constructor: (control) ->
+    @wrapper = $(control)
+    @closeButton = @wrapper.find('.close')
+    @wrapper.css
+      width: @wrapper.data('width')
+    @positionTop = @wrapper.data('position')
+    @scroll = @wrapper.data('scroll') == 'scroll'
+    @attachEvents()
+    @shader = new Shader(this)
+  
+  close: ()=>
+    @wrapper.hide()
+    @shader.domObject().hide()
+    @enableScroll() if !@scroll
+    
+  open: ()=>
+    @position()
+    @shader.show()
+    @wrapper.show()
+    @disableScroll() if !@scroll
+  
+  position: ()=>
+    scrollTop = $('body').scrollTop()
+    top = 20 + scrollTop
+    top = scrollTop + ($(window).height() - @wrapper.height()) / 2 if @positionTop == 'center'
+    left = ($(window).width() - @wrapper.width()) / 2
+    @wrapper.css
+      top: top
+      left: left
+  
+  disableScroll: ()=>
+    $('body').css
+      overflowY: 'hidden'
+  enableScroll: ()=>
+    $('body').css
+      overflowY: 'auto'
+  
+  attachEvents: ()=>
+    @closeButton.click(@close)
+    $(window).resize(@position)
+
+class PopUpButton
+  constructor: (control) ->
+    @button = $(control)
+    @popUp = new PopUp(@button.data("for"))
+    @attachEvents()
+    
+  attachEvents: ()=>
+    @button.click (event)=>
+      event.preventDefault()
+      @popUp.open() 
+
+class GalleryPane
+  constructor: (control) ->
+    @object = $(control)
+    @image = @object.find('img')
+    @resize()
+    
+  setImage: (imageSrc) =>
+    @image.attr('src',imageSrc)
+    
+  setWidth: (width) =>
+    @object.width(width)
+    
+  resize: () =>
+    @image.css
+      maxWidth: "100%"
+
+class GalleryImage
+  constructor: (control, gallery) ->
+    @object = $(control)
+    @image = @object.find('img')
+    @overlay = @object.find('.overlay')
+    @gallery = gallery
+    @pane = gallery.getPane()
+    @resize()
+    @attachEvents()
+  
+  getSrc: ()=>
+    @image.attr('src')
+  
+  show: ()=>
+    @pane.setImage(@getSrc())
+  
+  setInactive: ()=>
+    @overlay.show()
+      
+  setActive: ()=>
+    @overlay.hide()
+    @show()
+    
+  resize: ()=>
+    @image.css
+      maxHeight: "100%"
+    @object.height(@gallery.getConfig().elementHeight)
+    
+  attachEvents: ()=>
+    @object.click =>
+      @gallery.setCurrent(this)
+
+class Gallery
+  constructor: (control) ->
+    @wrapper = $(control)
+    $('<div class="gallery-pane"><img src="" /></div>').appendTo(@wrapper)
+    @pane = new GalleryPane(@wrapper.find('.gallery-pane'))
+    @config =
+      elementHeight: "100px"
+    @itemList = @wrapper.find('.items')
+    @items = (new GalleryImage(item, this) for item in @wrapper.find('.item'))
+    @current = @items[0]
+    @setCurrent(@items[0])
+    @resize()
+  
+  getPane: ()=>
+    @pane
+    
+  getConfig: ()=>
+    @config
+  
+  setCurrent: (image)=>
+    @current.setInactive()
+    @current = image
+    @current.setActive()
+  
+  resize: ()=>
+    @itemList.width('100%')
+    @pane.setWidth('100%')

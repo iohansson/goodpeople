@@ -1,0 +1,11 @@
+<% @actors_grouped.each do |group| %>
+  <div class="cf col-4">
+    <% group.each do |actor| %>
+      <div class="actor popup-button" data-for="#actor-<%= actor.id %>">
+        <%= image_tag actor.avatar %>
+        <%= content_tag :div, actor.name, class: 'name red-gradiented helper' %>
+        <%= content_tag :div, actor.price, class: 'price red-gradiented helper' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

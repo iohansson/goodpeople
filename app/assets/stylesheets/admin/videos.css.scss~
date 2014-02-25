@@ -1,0 +1,27 @@
+.videos {
+  .video {
+    width: 200px;
+    position: relative;
+    
+    iframe {
+      max-width: 100%;
+      border: none;
+    }
+    
+    .delete {
+      position: absolute;
+      top: 0;
+      right: -48px;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      border: none;
+      font-size: 36px;
+      color: #333;
+      text-shadow: 0 1px 1px rgba(0,0,0,.75);
+    }
+    .delete:hover {
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+class Query < ActiveRecord::Base
+  attr_accessible :comment, :name, :phone
+  
+  validates :name, presence: true
+  validates :phone, presence: true
+  
+  def self.latest
+    order('created_at ASC').last(10)
+  end
+end

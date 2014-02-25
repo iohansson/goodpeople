@@ -1,0 +1,28 @@
+.photos {
+  .photo {
+    width: 150px;
+    position: relative;
+    
+    img {
+      max-width: 100%;
+    }
+    
+    .delete {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      border: none;
+      background: rgba(255,255,255,.5);
+      font-size: 36px;
+      color: #999;
+      font-family: monospace;
+      text-shadow: 0 1px 1px rgba(0,0,0,.75);
+    }
+    .delete:hover {
+      color: #fff;
+    }
+  }
+}

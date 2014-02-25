@@ -1,0 +1,16 @@
+<h1>Ведущие</h1>
+
+<p>
+  <%= link_to 'Добавить', new_admin_actor_path %>
+</p>
+
+<table class="table table-striped">
+  <thead>
+    <th>#</th>
+    <th>Имя</th>
+    <th>Цена</th>
+    <th>Видимый</th>
+    <th>Действия</th>
+  </thead>
+  <%= render @actors %>
+</table>

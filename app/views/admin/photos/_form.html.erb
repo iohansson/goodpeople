@@ -1,0 +1,6 @@
+<%= form_tag admin_actor_photos_path(actor), method: :post, multipart: true do %>
+  <%= label_tag :image, "Добавить фото" %>
+  <%= file_field_tag :image %>
+  
+  <%= submit_tag "Добавить" %>
+<% end %>

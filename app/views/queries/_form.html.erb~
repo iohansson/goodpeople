@@ -1,0 +1,25 @@
+<p>
+  Укажите ваш контактный телефон и наш менеджер свяжется с вами
+</p>
+<%= form_for @query, remote: true do |f| %>
+
+  <% if @query.errors.any? %>
+    <div class="error-explanation">
+      <h2>Ошибки:</h2>
+
+      <ul>
+      <% @query.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :phone, "Телефон" %>
+  <%= f.text_field :phone %>
+  <%= f.label :name, "Имя" %>
+  <%= f.text_field :name %>
+  <%= f.label :comment, "Комментарий" %>
+  <%= f.text_area :comment, rows: 5 %>
+  <%= f.submit "Отправить", class: "pink-button" %>
+<% end %>

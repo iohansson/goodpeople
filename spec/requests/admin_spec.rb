@@ -1,0 +1,113 @@
+require 'spec_helper'
+
+describe "Administration" do
+  include LoginMacros
+  include AttachMacros
+  include MiscMacros
+  
+  before do
+    create_user_and_sign_in_via_form
+  end
+  context "navigation" do
+    it "displays menu" do
+      expect(page).to have_css(".navbar")
+    end
+  end
+  context "actors management" do
+    before do
+      expect(current_path).to eq(admin_path)
+      click_link "Ведущие"
+    end
+    it "adds an actor" do
+      expect{
+        add_actor
+      }.to change{Actor.count}.by(1)
+      expect(current_path).to eq(admin_actor_path(Actor.last))
+      expect(page).to have_content("Александр") 
+    end
+    it "deletes actor" do
+      add_actor
+      click_link 'Ведущие'
+      expect{
+        within "tr##{Actor.last.id}.actor" do
+          click_button "Удалить"
+        end
+      }.to change{Actor.count}.by(-1)
+      expect(current_path).to eq(admin_actors_path)
+    end
+    it "adds photos to actor" do
+      actor = FactoryGirl.create(:actor)
+      visit current_path
+      expect {
+        upload_photo_to_actor(actor)
+      }.to change{actor.photos.count}.by(1)
+      expect(current_path).to eq(admin_actor_path(actor))
+      expect(page).to have_xpath("//img[@src[contains(.,'test.jpg')]]")
+    end
+    it "deletes photos from actor" do
+      actor = FactoryGirl.create(:actor)
+      visit current_path
+      upload_photo_to_actor(actor)
+      expect {
+        within "##{Photo.last.id}.photo" do
+          click_button "x"
+        end
+      }.to change{actor.photos.count}.by(-1)
+      expect(current_path).to eq(admin_actor_path(actor))
+      expect(page).not_to have_xpath("//img[@src[contains(.,'test.jpg')]]")
+    end
+    it "adds videos to actor" do
+      actor = FactoryGirl.create(:actor)
+      visit current_path
+      expect {
+        upload_video_to_actor(actor)
+      }.to change{actor.videos.count}.by(1)
+      expect(current_path).to eq(admin_actor_path(actor))
+      expect(page).to have_xpath("//iframe[@src[contains(.,'video_id')]]")
+    end
+    it "deletes videos from actor" do
+      actor = FactoryGirl.create(:actor)
+      visit current_path
+      upload_video_to_actor(actor)
+      expect {
+        within "##{Video.last.id}.video" do
+          click_button "x"
+        end
+      }.to change{actor.videos.count}.by(-1)
+      expect(current_path).to eq(admin_actor_path(actor))
+      expect(page).not_to have_xpath("//iframe[@src[contains(.,'video_id')]]")
+    end
+  end
+  context "Orders" do
+    it "displays last order list" do
+      orders = FactoryGirl.create_list(:order, 15)
+      visit admin_path
+      expect(page).to have_content("Последние заказы")
+      expect(all('.order').size).to eq(10)
+    end
+    it "lists all orders by pages" do
+      orders = FactoryGirl.create_list(:order, 15)
+      visit admin_path
+      click_link 'Заказы'
+      expect(all('.order').size).to eq(10)
+      click_link '2'
+      expect(all('.order').size).to eq(5)
+    end
+  end
+  context "Queries" do
+    it "displays last query list" do
+      queries = FactoryGirl.create_list(:query, 15)
+      visit admin_path
+      expect(page).to have_content("Последние заявки")
+      expect(all('.query').size).to eq(10)
+    end
+    it "lists all queries by pages" do
+      queries = FactoryGirl.create_list(:query, 15)
+      visit admin_path
+      click_link 'Заявки'
+      expect(all('.query').size).to eq(10)
+      click_link '2'
+      expect(all('.query').size).to eq(Query.all.count - 10)
+    end
+  end
+end

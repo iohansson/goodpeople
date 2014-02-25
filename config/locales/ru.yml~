@@ -1,0 +1,22 @@
+ru:
+  activerecord:
+    models:
+      query: "Заявка"
+    attributes:
+      query:
+        name: "Имя"
+        phone: "Телефон"
+        comment: "Комментарий"
+  errors:
+    # The default format to use in full error messages.
+    format: "%{attribute} %{message}"
+
+    # The values :model, :attribute and :value are always available for interpolation
+    # The value :count is available when applicable. Can be used for pluralization.
+    attributes:
+      name:
+        blank: "должно быть заполнено"
+      phone:
+        blank: "не указан"
+      comment:
+        blank: "не заполнен"

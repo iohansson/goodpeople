@@ -1,0 +1,15 @@
+<%= form_for [:admin, @actor] do |f| %>
+  <%= f.label :name, "Имя" %>
+  <%= f.text_field :name %>
+  
+  <%= f.label :price, "Стоимость" %>
+  <%= f.text_field :price %>
+  
+  <%= f.label :description, "Описание" %>
+  <%= f.text_area :description %>
+  
+  <%= f.label :is_published, "Видимый" %>
+  <%= f.check_box :is_published %>
+  
+  <%= f.submit "Сохранить" %> 
+<% end %>

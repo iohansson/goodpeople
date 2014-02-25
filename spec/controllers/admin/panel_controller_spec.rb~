@@ -1,0 +1,20 @@
+require 'spec_helper'
+
+describe Admin::PanelController do
+  include LoginMacros
+  context "not logged in" do
+    it "requires login" do
+      require_admin_login
+    end
+  end
+  context "logged in" do
+    before do
+      create_user_and_sign_in
+    end
+    describe "GET index" do
+      it "should be success" do
+        expect(response.status).to eq(200)
+      end
+    end
+  end
+end

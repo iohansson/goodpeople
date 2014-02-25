@@ -1,0 +1,29 @@
+<p>
+  Пожалуйста, внимательно заполните все поля
+</p>
+<%= form_for @order, remote: true do |f| %>
+
+  <% if @order.errors.any? %>
+    <div class="error-explanation">
+      <h2>Ошибки:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :phone, "Телефон" %>
+  <%= f.text_field :phone %>
+  <%= f.label :name, "Имя" %>
+  <%= f.text_field :name %>
+  <%= f.label :comment, "Комментарий" %>
+  <%= f.text_area :comment, rows: 5 %>
+  <%= f.label :event_date, "Дата мероприятия" %>
+  <%= f.text_field :event_date %>
+  <%= f.label :actor_id, "Ведущий" %>
+  <%= f.select :actor_id, @actors.collect { |actor| actor.name } %>
+  <%= f.submit "Отправить", class: "pink-button" %>
+<% end %>
