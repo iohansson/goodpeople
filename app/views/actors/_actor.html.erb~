@@ -8,28 +8,32 @@
       <%= content_tag :p, actor.description %>
     </div>
   </div>
-  <div class="gallery">
-    <ul class="items">
-      <% actor.photos.each do |photo| %>
-        <li class="item"><%= image_tag photo.image_url, class: "compact" %><div class="overlay"></div>
-      <% end %>
-    </ul>
-  </div>
-  <h4 class="pinky txt-center">Видео</h4>
-  <div class="tv">
-    <div class="slider">
-      <ul class="slides">
-        <% actor.videos.each do |video| %>
-          <li class="slide"><%= video.embed_code.html_safe %>
+  <% if actor.photos.any?
+    <div class="gallery">
+      <ul class="items">
+        <% actor.photos.each do |photo| %>
+          <li class="item"><%= image_tag photo.image_url, class: "compact" %><div class="overlay"></div>
         <% end %>
       </ul>
-      <a class="arrow outer-arrow left">
-        &lsaquo;
-      </a>
-      <a class="arrow outer-arrow right">
-        &rsaquo;
-      </a> 
     </div>
-  </div>
+  <% end %>
+  <% if actor.videos.any? %>
+    <h4 class="pinky txt-center">Видео</h4>
+    <div class="tv">
+      <div class="slider">
+        <ul class="slides">
+          <% actor.videos.each do |video| %>
+            <li class="slide"><%= video.embed_code.html_safe %>
+          <% end %>
+        </ul>
+        <a class="arrow outer-arrow left">
+          &lsaquo;
+        </a>
+        <a class="arrow outer-arrow right">
+          &rsaquo;
+        </a> 
+      </div>
+    </div>
+  <% end %>
   <span class="close">&times;</span>
 </div>

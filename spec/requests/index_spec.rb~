@@ -37,7 +37,7 @@ describe "index page" do
     it "adds orders", js: true, focus: true do
       actor
       visit current_path
-      all('a', text: "Заказать").first.click
+      all('a', text: "Оставьте заявку").first.click
       within ".order-form" do
         fill_in "Телефон", with: "9628767884"
         fill_in "Имя", with: "Андрей Денисович"

@@ -27,5 +27,8 @@ class Admin::ActorsController < Admin::ApplicationController
   end
 
   def destroy
+    @actor = Actor.find(params[:id])
+    @actor.destroy
+    redirect_to admin_actors_url, notice: "Ведущий удален"
   end
 end

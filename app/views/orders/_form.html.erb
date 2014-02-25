@@ -22,8 +22,10 @@
   <%= f.label :comment, "Комментарий" %>
   <%= f.text_area :comment, rows: 5 %>
   <%= f.label :event_date, "Дата мероприятия" %>
-  <%= f.text_field :event_date %>
-  <%= f.label :actor_id, "Ведущий" %>
-  <%= f.select :actor_id, @actors.collect { |actor| actor.name } %>
+  <%= f.text_field :event_date, class: "date" %>
+  <% if @actors.any? %>
+    <%= f.label :actor_id, "Ведущий" %>
+    <%= f.select :actor_id, options_from_collection_for_select(@actors, 'id', 'name', @actors.first.id) %>
+  <% end %>
   <%= f.submit "Отправить", class: "pink-button" %>
 <% end %>

@@ -9,7 +9,7 @@ class QueriesController < ApplicationController
       QueryMailer.new_query(@query).deliver
       render partial: 'success', layout: false
     else
-      render partial: 'form', layout: false
+      render partial: 'form', layout: false, locals: { title: nil, submit_text: nil }
     end
   end
   

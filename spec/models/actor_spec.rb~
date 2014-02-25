@@ -27,4 +27,13 @@ describe Actor do
       expect(subject).to respond_to :avatar
     end
   end
+  context "Videos" do
+    let(:video) { FactoryGirl.create(:video) }
+    let(:actor) { FactoryGirl.create(:actor) }
+    
+    it "has videos?" do
+      expect(video.actor.has_videos?).to eq(true)
+      expect(actor.has_videos?).to eq(false)
+    end
+  end
 end

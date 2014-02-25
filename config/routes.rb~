@@ -14,7 +14,14 @@ Goodpeople::Application.routes.draw do
     resources :actors do
       resources :photos
       resources :videos
+      
+      member do
+        patch :avatar
+      end
     end
+    
+    resources :orders, only: [:index]
+    resources :queries, only: [:index]
   end
 
   resources :actors

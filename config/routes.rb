@@ -1,8 +1,4 @@
 Goodpeople::Application.routes.draw do
-  get "queries/index"
-
-  get "orders/index"
-
   resources :orders, only: [:new, :create, :show]
   resources :queries, only: [:new, :create, :show]
 
@@ -18,6 +14,10 @@ Goodpeople::Application.routes.draw do
     resources :actors do
       resources :photos
       resources :videos
+      
+      member do
+        put :avatar
+      end
     end
     
     resources :orders, only: [:index]

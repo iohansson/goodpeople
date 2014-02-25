@@ -1,5 +1,5 @@
 class Actor < ActiveRecord::Base
-  attr_accessible :description, :is_published, :name, :price
+  attr_accessible :description, :is_published, :name, :price, :avatar_id
   
   validates :name, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than: 100 }
@@ -7,7 +7,17 @@ class Actor < ActiveRecord::Base
   has_many :photos, dependent: :destroy
   has_many :videos, dependent: :destroy
   
+  scope :published, where(is_published: true)
+  
   def avatar
-    photos.first.image_url
+    if avatar_id
+      photos.find(avatar_id).image_url
+    else
+      "dummy.jpg"
+    end
+  end
+  
+  def has_videos?
+    videos.count > 0
   end
 end

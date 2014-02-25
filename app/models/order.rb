@@ -19,6 +19,6 @@ class Order < ActiveRecord::Base
   end
   
   def actor_name
-    actor.name
+    actor.name if actor
   end
 end

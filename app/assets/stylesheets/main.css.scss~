@@ -4,6 +4,11 @@
   -moz-box-sizing: border-box;
 }
 
+body {
+  min-width: 1024px;
+  font-family: 'Comfortaa', sans-serif;
+}
+
 .padded-bottom {
   padding-bottom: 10px;
 }
@@ -45,6 +50,9 @@ ul { list-style-type: none; }
 .txt-center {
   text-align: center;
 }
+.txt-left {
+  text-align: left;
+}
 
 .error-explanation {
   ul {
@@ -70,6 +78,10 @@ header, footer {
     }
   }
   
+  img {
+    max-width: 100%;
+  }
+  
   .icons {
     img {
       padding-right: 5px;
@@ -81,9 +93,22 @@ footer {
   height: auto;
 }
 
-.actors {
-  width: 33.3%;
-  margin: 50px auto;
+.actors-wrapper {
+  width: 70%;
+  display: inline-block;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  
+  .actors {
+    width: 60%;
+    display: inline-block;
+    margin-right: 5%;
+  }
+  
+  .form-container {
+    width: 34%;
+    display: inline-block;
+  }
 }
 
 .actor {
@@ -101,7 +126,6 @@ footer {
   }
   
   img {
-    min-width: 100%;
     max-width: 100%;
   }
 }
@@ -160,6 +184,10 @@ img.icon-phone {
 
 .actors-list {
   background: #bababa;
+  
+  .actor {
+    max-height: 200px;
+  }
 }
 
 .ceremony {
@@ -223,6 +251,7 @@ img.icon-phone {
     }
   }
   .clock {
+    margin-bottom: 20px;
   }
 }
 
@@ -260,11 +289,11 @@ img.icon-phone {
     color: white;
   }
   
-  a.arrow:first-child {
+  a.arrow.left {
     left: 0;
   }
   
-  a.arrow:last-child {
+  a.arrow.right {
     right: 0;
   }
   
@@ -282,6 +311,7 @@ img.icon-phone {
     white-space: nowrap;
     list-style-type: none;
     padding-left: 0;
+    margin-top: 0;
     
     li {
       display: inline-block;
@@ -476,8 +506,9 @@ img.compact {
 }
 .floating-third {
   display: inline-block;
-  width: 31%;
+  width: 30%;
   margin: 10px 1%;
+  vertical-align: top;
 }
 .contented {
   padding-left: 12.5%;
@@ -529,6 +560,9 @@ img.compact {
 }
 .fright {
   float: right;
+}
+.vt {
+  vertical-align: top;
 }
 .relative {
   position: relative;

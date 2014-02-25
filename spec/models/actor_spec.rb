@@ -36,4 +36,11 @@ describe Actor do
       expect(actor.has_videos?).to eq(false)
     end
   end
+  context "Scoping" do
+    it "retieves published" do
+      actor = FactoryGirl.create(:actor)
+      unpublished_actor = FactoryGirl.create(:actor, is_published: false)
+      expect(Actor.published.all).to eq([actor])
+    end
+  end
 end

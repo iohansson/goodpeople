@@ -6,19 +6,22 @@ describe "index page" do
   
   let(:actors) { FactoryGirl.create_list(:actor_with_photo_video_comments, 16) }
   let(:actor) { FactoryGirl.create(:actor_with_photo_video_comments, name: "Майк Тайсон") }
+  let(:unpublished_actor) { FactoryGirl.create(:actor_with_photo_video_comments, name: "Oliver Twist", is_published: false) }
   
   before do
     visit root_path
   end
   context "actors" do
-    it "shows all actors" do
+    it "shows published actors" do
       actors
+      unpublished_actor
       visit current_path
       actors.each do |actor|
         within actors_container do
           expect_to_have_actor_info(actor)
         end
       end
+      expect(page).not_to have_content(unpublished_actor.name)
     end
   end
   context "calling back" do

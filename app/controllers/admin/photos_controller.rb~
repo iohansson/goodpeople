@@ -6,6 +6,10 @@ class Admin::PhotosController < Admin::ApplicationController
     @photo.actor = @actor
     @photo.image = params[:image]
     if @photo.save
+      if !@actor.avatar
+        @actor.avatar = @photo
+        @actor.save
+      end
       redirect_to admin_actor_path(@actor), notice: "Фото добавлено"
     else
       redirect_to admin_actor_path(@actor), notice: "Не удалось добавить фото"
@@ -15,7 +19,7 @@ class Admin::PhotosController < Admin::ApplicationController
   def destroy
     photo = Photo.find(params[:id])
     photo.destroy
-    redirect_to admin_actor_url @actor, notice: "Фото удалено"
+    redirect_to admin_actor_url(@actor), notice: "Фото удалено"
   end
   
   protected

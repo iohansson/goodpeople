@@ -1,17 +1,7 @@
-<tr id="<%= actor.id %>" class="actor">
-  <td>
-    <%= actor.id %>
-  </td>
-  <td>
-    <%= link_to actor.name, admin_actor_path(actor) %>
-  </td>
-  <td>
-    <%= actor.price %>
-  </td>
-  <td>
-    <%= actor.is_published %>
-  </td>
-  <td>
-    <%= button_to "Удалить", admin_actor_path(actor), method: :delete %>
-  </td>
-</tr>
+<div id="<%= order.id %>" class="order">
+  <%= content_tag :h4 do %>
+    <%= "Заказ от #{order.name} для #{order.actor_name}" %>
+  <% end %>
+  <%= content_tag :p, order.phone %>
+  <%= content_tag :p, order.comment %>
+</div>

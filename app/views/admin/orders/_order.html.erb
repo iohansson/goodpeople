@@ -1,5 +1,7 @@
 <div id="<%= order.id %>" class="order">
-  <%= order.name %>
-  <%= order.phone %>
-  <%= order.comment %>
+  <%= content_tag :h4 do %>
+    <%= "Заказ от #{order.name} для #{order.actor_name}" %>
+  <% end %>
+  <%= content_tag :span, order.phone %>
+  <%= content_tag :p, order.comment %>
 </div>

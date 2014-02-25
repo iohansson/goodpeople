@@ -38,15 +38,30 @@ describe "Administration" do
     it "adds photos to actor" do
       actor = FactoryGirl.create(:actor)
       visit current_path
+      click_link actor.name
       expect {
         upload_photo_to_actor(actor)
       }.to change{actor.photos.count}.by(1)
       expect(current_path).to eq(admin_actor_path(actor))
       expect(page).to have_xpath("//img[@src[contains(.,'test.jpg')]]")
     end
+    it "selects avatar image" do
+      actor = FactoryGirl.create(:actor)
+      visit current_path
+      click_link actor.name
+      5.times { upload_photo_to_actor(actor) }
+      within '.photos' do
+        within '#2.photo' do
+          click_link 'Аватар'
+        end
+      end
+      actor.reload
+      expect(actor.avatar_id).to eq(2)
+    end
     it "deletes photos from actor" do
       actor = FactoryGirl.create(:actor)
       visit current_path
+      click_link actor.name
       upload_photo_to_actor(actor)
       expect {
         within "##{Photo.last.id}.photo" do
@@ -106,8 +121,7 @@ describe "Administration" do
       visit admin_path
       click_link 'Заявки'
       expect(all('.query').size).to eq(10)
-      click_link '2'
-      expect(all('.query').size).to eq(Query.all.count - 10)
+      expect(page).to have_link('2')
     end
   end
 end

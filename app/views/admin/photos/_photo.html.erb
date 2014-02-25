@@ -1,4 +1,5 @@
 <%= content_tag :div, class: "photo", id: photo.id do %>
   <%= image_tag photo.image_url %>
   <%= button_to "x", admin_actor_photo_path(actor_id: photo.actor, id: photo.id), method: :delete, class: "delete" %>
+  <%= link_to 'Аватар', avatar_admin_actor_path(id: photo.actor, photo_id: photo.id), method: :put %>
 <% end %>

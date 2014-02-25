@@ -5,13 +5,13 @@ jQuery ->
     new PopUpButton(el)
   $.each $('.gallery'), (index,el) ->
     new Gallery(el)
-  $('#callback-form, #order-form').bind "ajax:beforeSend", (evt, xhr, settings)->
+  $('#callback-form, #order-form, #callback-form-static').bind "ajax:beforeSend", (evt, xhr, settings)->
     form = $(this).find('.form')
     submitButton = form.find("input[type='submit']")
     submitButton.data('origText', submitButton.text())
     submitButton.text('Отправляем...')
     submitButton.attr('disabled', 'disabled')
-  $('#callback-form, #order-form').bind "ajax:complete", (evt, xhr, status)->
+  $('#callback-form, #order-form, #callback-form-static').bind "ajax:complete", (evt, xhr, status)->
     form = $(this).find('.form')
     submitButton = form.find("input[type='submit']")
     form.html(xhr.responseText)
@@ -23,7 +23,7 @@ jQuery ->
     language: 'ru'
   clock.setTime(3600*24*2)
   clock.start()
-    
+  $('.date').datepicker($.datepicker.regional['ru'])
   
 class Slider
   constructor: (control) ->

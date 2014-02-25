@@ -4,7 +4,6 @@ module AttachMacros
   end
   
   def upload_photo_to_actor(actor)
-    click_link actor.name
     within ".photos" do
       attach_file "Добавить фото", test_files_dir + "test.jpg"
       click_button "Добавить"

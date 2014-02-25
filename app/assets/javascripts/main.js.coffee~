@@ -20,10 +20,10 @@ jQuery ->
   clock = $('.clock').FlipClock
     countdown: true
     clockFace: 'DailyCounter'
-    defaultLanguage: 'russian'
+    language: 'ru'
   clock.setTime(3600*24*2)
   clock.start()
-    
+  $('.date').datepicker($.datepicker.regional['ru'])
   
 class Slider
   constructor: (control) ->

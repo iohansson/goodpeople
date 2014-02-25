@@ -13,4 +13,5 @@
  *= require normalize
  *= require actors
  *= require flipclock
+ *= require jquery.ui.datepicker
  */

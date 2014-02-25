@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Goodpeople</title>
+  <title>Люди Х</title>
   <%= stylesheet_link_tag    "admin/application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -11,15 +11,12 @@
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <a class="brand" href="#">
-          Люди Х
-        </a>
+        <%= link_to "Люди Х", admin_path %>
         <div class="nav-collapse">
           <ul class="nav">
-            <li>
-              <%= link_to 'Ведущие', admin_actors_path %>
-              <%= link_to 'Заказы', admin_orders_path %>
-            </li>
+            <li><%= link_to 'Ведущие', admin_actors_path %>
+            <li><%= link_to 'Заказы', admin_orders_path %>
+            <li><%= link_to 'Заявки', admin_queries_path %>
           </ul>
         </div>
       </div>

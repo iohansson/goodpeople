@@ -1,5 +1,5 @@
 <div id="<%= query.id %>" class="query">
-  <%= query.name %>
-  <%= query.phone %>
-  <%= query.comment %>
+  <%= content_tag :span, query.name, class: "name" %>
+  <%= content_tag :span, query.phone, class: "phone" %>
+  <%= content_tag :p, query.comment %>
 </div>

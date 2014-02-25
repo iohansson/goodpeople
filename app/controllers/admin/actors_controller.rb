@@ -31,4 +31,13 @@ class Admin::ActorsController < Admin::ApplicationController
     @actor.destroy
     redirect_to admin_actors_url, notice: "Ведущий удален"
   end
+  
+  def avatar
+    @actor = Actor.find(params[:id])
+    if @actor.update_attributes(avatar_id: params['photo_id'])
+      redirect_to admin_actor_path(@actor), notice: 'ок'
+    else
+      redirect_to admin_actor_path(@actor), notice: 'не ок'
+    end
+  end
 end

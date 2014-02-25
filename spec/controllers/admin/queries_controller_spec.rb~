@@ -1,12 +1,7 @@
 require 'spec_helper'
 
-describe Admin::OrdersController do
-  include LoginMacros
-  
-  before do
-    create_user_and_sign_in
-  end
-  
+describe Admin::QueriesController do
+
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'

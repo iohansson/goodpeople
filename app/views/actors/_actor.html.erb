@@ -8,14 +8,16 @@
       <%= content_tag :p, actor.description %>
     </div>
   </div>
-  <div class="gallery">
-    <ul class="items">
-      <% actor.photos.each do |photo| %>
-        <li class="item"><%= image_tag photo.image_url, class: "compact" %><div class="overlay"></div>
-      <% end %>
-    </ul>
-  </div>
-  <% if actor.has_videos? %>
+  <% if actor.photos.any? %>
+    <div class="gallery">
+      <ul class="items">
+        <% actor.photos.each do |photo| %>
+          <li class="item"><%= image_tag photo.image_url, class: "compact" %><div class="overlay"></div>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if actor.videos.any? %>
     <h4 class="pinky txt-center">Видео</h4>
     <div class="tv">
       <div class="slider">

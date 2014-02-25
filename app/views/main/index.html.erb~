@@ -1,5 +1,12 @@
-<div class="relative">
-  <%= render 'shared/actor_slider' %>
+<div class="relative txt-center">
+  <div class="txt-center actors-wrapper">
+    <%= render 'shared/actor_slider' %>
+    <div class="form-container vt" id="callback-form">
+      <div class="form txt-left">
+        <%= render partial: 'queries/form', locals: { title: "Оставьте заявку", submit_text: "Оставьте заявку" } %>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="contented background-gray txt-center padded-top padded-bottom">
   <h3 class="red big-caption">5 основных проблем, с которыми сталкиваются 95% клиентов при выборе ведущего</h3>
@@ -89,14 +96,16 @@
     </div>
   </div>
 </div>
-<div class="gray-bar"></div>
-<h2 class="pinky huge-caption txt-center background-gray nmt nmb pdt pdb">Наши ведущие</h2>
-<div class="actors-list pdt pdb">
-  <%= render 'actors/list' %>
-</div>
-<h3 class="pinky txt-center contented background-gray nmt nmb pdt pdb">
-  Стоимость указана за пятичасовую программу ведущего уже с диджеем и полным комплектом звукового оборудования!
-</h3>
+<% if !@actors.empty? %>
+  <div class="gray-bar"></div>
+  <h2 class="pinky huge-caption txt-center background-gray nmt nmb pdt pdb">Наши ведущие</h2>
+  <div class="actors-list pdt pdb">
+    <%= render 'actors/list' %>
+  </div>
+  <h3 class="pinky txt-center contented background-gray nmt nmb pdt pdb">
+    Стоимость указана за пятичасовую программу ведущего уже с диджеем и полным комплектом звукового оборудования!
+  </h3>
+<% end %>
 <div class="gray-bar"></div>
 <div class="ceremony pdt pdb">
   <h3 class="txt-center red big-caption">
@@ -120,6 +129,7 @@
         </div>
         <div class="right-inner">
           <p class="big-caption gray">До конца акции осталось:</p>
+          <div class="clock"></div>
           <div>
             <a href="#" class="pink-button popup-button" data-for="#order-form" %>Оставьте заявку</a>
           </div>
@@ -167,13 +177,13 @@
 <div class="gray-bar"></div>
 <div class="form-container order-form popup" id="order-form" data-width="25%" data-position="center">
   <div class="form">
-    <%= render 'orders/form' %>
+    <%= render partial: 'orders/form', locals: { title: nil, submit_text: nil } %>
   </div>
   <span class="close">&times;</span>
 </div>
 <div class="form-container callback-form popup" id="callback-form" data-width="25%" data-position="center">
   <div class="form">
-    <%= render 'queries/form' %>
+    <%= render partial: 'queries/form', locals: { title: nil, submit_text: nil } %>
   </div>
   <span class="close">&times;</span>
 </div>

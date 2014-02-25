@@ -14,7 +14,7 @@ describe Query do
   context "Scoping" do
     it "retrieves latest by created_at queries" do
       FactoryGirl.create_list(:query, 20)
-      expect(Query.latest).to eq(Query.order('created_at ASC').last(10))
+      expect(Query.latest).to eq(Query.order('created_at DESC').first(10))
     end
   end
 end
