@@ -43,7 +43,7 @@
     <%= content_tag :div, msg, class: name %>
   <% end %>
   <div class="relative txt-center">
-    <div class="txt-center actors-wrapper">
+    <div class="txt-right actors-wrapper">
       <%= render 'shared/actor_slider' %>
       <div class="form-container vt" id="callback-form-static">
         <div class="form txt-left">
