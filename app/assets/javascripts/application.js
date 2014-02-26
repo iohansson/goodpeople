@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require flipclock.min
 //= require flipclock-ru
+//= require dailycounter
 //= require jquery.ui.datepicker
 //= require jquery.ui.datepicker-ru
 //= require_tree .

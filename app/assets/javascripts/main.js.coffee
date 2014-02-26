@@ -17,11 +17,10 @@ jQuery ->
     form.html(xhr.responseText)
     submitButton.text(submitButton.data('origText'))
     submitButton.removeAttr('disabled')
-  clock = $('.clock').FlipClock
-    countdown: true
+  clock = $('.clock').FlipClock 3600*24*2,
     clockFace: 'DailyCounter'
     language: 'ru'
-  clock.setTime(3600*24*2)
+    countdown: true
   clock.start()
   $('.date').datepicker($.datepicker.regional['ru'])
   

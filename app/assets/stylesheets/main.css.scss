@@ -53,6 +53,9 @@ ul { list-style-type: none; }
 .txt-left {
   text-align: left;
 }
+.txt-right {
+  text-align: right;
+}
 
 .error-explanation {
   ul {
@@ -60,8 +63,13 @@ ul { list-style-type: none; }
   }
 }
 
-header, footer {
-  background: #ebebeb;
+.header-wrapper {
+  background: url('bg-stupid.jpg') no-repeat left top;
+  background-size: cover;
+}
+
+.header, footer {
+  background: rgba(235,235,235,.5);
   height: 160px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -94,19 +102,19 @@ footer {
 }
 
 .actors-wrapper {
-  width: 70%;
+  width: 80%;
   display: inline-block;
   margin-top: 30px;
   margin-bottom: 50px;
   
   .actors {
-    width: 60%;
+    width: 40%;
     display: inline-block;
     margin-right: 5%;
   }
   
   .form-container {
-    width: 34%;
+    width: 24%;
     display: inline-block;
   }
 }

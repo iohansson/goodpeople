@@ -1,5 +1,5 @@
 <% if @actors.any? %>
-  <% cache ['actors', Actor.latest] do %>
+  <% cache ['actors_slider', Actor.latest] do %>
     <div class="actors">
       <div class="slider">
         <ul>
