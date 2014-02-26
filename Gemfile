@@ -30,6 +30,10 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'sqlite3'
 end
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
