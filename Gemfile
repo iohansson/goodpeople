@@ -32,7 +32,6 @@ group :development, :test do
 end
 group :production do
   gem 'pg'
-  gem 'thin'
 end
 
 gem 'jquery-rails'
@@ -47,10 +46,10 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
