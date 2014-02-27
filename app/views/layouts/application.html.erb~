@@ -8,48 +8,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="main">
-<header>
-  <div class="col-3 cf">
-    <div>
-      <%= image_tag "logo.png", alt: "Люди хорошие. Профессиональные ведущие на Ваш праздник" %>
-    </div>
-    <div class="events-served">
-      <%= image_tag "events-served.png" %><br />
-      <%= image_tag "events-served-counter.png", class: "counter" %>
-    </div>
-    <div>
-      <div class="cf">
-        <div class="fleft">
-          <p class="phone">
-            <%= image_tag "icon-phone.png", class: "icon-phone" %> 
-            +7 (495) 968-83-97
-          </p>
-          <a href="#" class="pink-button popup-button" data-for="#callback-form">Заказать звонок</a>
-        </div>
-        <div class="fright table icons">
-          <div class="row">
-            <div class="cell">
-              <%= image_tag "icon-fb.jpg" %>
-            </div>
-            <div class="cell">
-              <%= image_tag "icon-youtube.jpg" %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="cell">
-              <%= image_tag "icon-twitter.jpg" %>
-            </div>
-            <div class="cell">
-              <%= image_tag "icon-vk.jpg" %>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, class: name %>
-<% end %>
 <%= yield %>
 <footer>
   <div class="col-3 cf">
